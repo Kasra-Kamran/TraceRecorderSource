@@ -34,3 +34,14 @@ target_include_directories(TraceRecorder PUBLIC include config kernelports/FreeR
     ${FREERTOS_CONFIG_FILE_DIRECTORY} ${CMSIS_DEVICE_HEADER_PATH})
 
 target_link_libraries(TraceRecorder PRIVATE stm32h5-cmsis)
+
+
+include(Doxygen)
+
+if(TRACERECORDER_DOXYGEN_OUTPUT_DIRECTORY)
+    set(DOXYGEN_OUTPUT_DIRECTORY ${TRACERECORDER_DOXYGEN_OUTPUT_DIRECTORY})
+  else()
+    set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doxygen")
+  endif()
+
+add_doxygen_target(TARGET TraceRecorder PROJECT_NAME "STM32H5-CMSIS" OUTPUT_DIRECTORY ${DOXYGEN_OUTPUT_DIRECTORY})
